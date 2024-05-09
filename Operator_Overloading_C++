@@ -1,0 +1,37 @@
+#include<iostream>
+class BankAccount
+{
+	int balance;
+
+public:
+
+	BankAccount(int balanceArg) :balance{ balanceArg }
+	{
+
+	}
+	int getbalance()const
+	{
+		return this->balance;
+	  }
+
+	BankAccount operator+(const BankAccount&  operandTwo) const
+	{
+		BankAccount newAccount{0};
+		newAccount.balance = this->getbalance()+ operandTwo.getbalance();
+		return newAccount;
+	}
+
+	~BankAccount()
+	{
+		std::cout << "Distructor Called"<<"\n";
+	}
+};
+
+int main()
+{
+	BankAccount acc1(1000);
+	BankAccount acc2(2000);
+	BankAccount acc3 = acc1 + acc2; //both class must be belongs to same class
+	std::cout<<acc3<<"\n";
+	
+}
