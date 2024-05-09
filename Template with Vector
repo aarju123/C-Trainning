@@ -1,0 +1,84 @@
+#include<iostream>
+#include <typeinfo>
+
+using namespace std;
+
+template<typename T>
+class Vector
+{
+    T items[10];
+    int capacity;
+    int currentIndexItem = 0;
+
+public:
+    Vector()
+    {
+        this->capacity = sizeof(items)/sizeof(T);
+    }
+    
+    void push_back(T itemArg)
+    {
+        if(capacity != 0)
+        {
+            items[currentIndexItem] = itemArg;
+            capacity = capacity - 1;
+            currentIndexItem += 1;
+        }
+    }
+    
+    T operator[](int index) {
+        return this->items[index];
+    }
+    
+    friend std::ostream& operator<<(std::ostream& out, const Vector& vObj)
+    {
+        for (int i = 0; i < vObj.currentIndexItem; i++)
+        {
+            out << vObj.items[i] << "\t";
+        }
+        return out;
+    }
+};
+
+class Device
+{
+public:
+    string name;
+    
+    friend std::ostream& operator<<(std::ostream& out, const Device& vObj)
+    {
+        out << vObj.name;
+        return out;
+    }
+};
+
+int main()
+{
+    Vector<int> v;
+    v.push_back(10);
+    v.push_back(20);
+    v.push_back(30);
+    v.push_back(40);
+
+    cout << "Vector<int> v: " << v << endl;
+
+    Vector<string> vs;
+    vs.push_back("A10");
+    vs.push_back("A20");
+
+    cout << "Vector<string> vs: " << vs << endl;
+
+    Vector<Device> vd;
+    Device Obj1;
+    Obj1.name = "D1";
+     
+    Device Obj2;
+    Obj2.name = "D2";
+     
+    vd.push_back(Obj1);
+    vd.push_back(Obj2);
+
+    cout << "Vector<Device> vd: " << vd << endl;
+
+    return 0;
+}
