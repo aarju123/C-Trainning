@@ -1,0 +1,64 @@
+// Vector is index baed container
+#include<iostream>
+
+using namespace std;
+
+class IntVector
+{
+
+	int items[10];
+	int capacity;
+	int currentIndexItem = 0;
+
+
+public:
+
+	IntVector()
+	{
+		capacity = sizeof(items) / sizeof(int);
+
+	}
+
+	void push_back(int itemArg)
+	{
+		if (capacity != 0)
+		{
+			items[currentIndexItem] = itemArg;
+			capacity = capacity - 1;
+			currentIndexItem += 1;
+		}
+
+
+	}
+	int operator[](int index) {
+		return this->items[index];
+	}
+
+	friend std::ostream& operator<<(std::ostream& out, const IntVector& vObj)
+	{
+		//for(int i=0;i<=vObj.capa)
+		for (int i = 0; i < vObj.currentIndexItem; i++)
+		{
+			out << vObj.items[i] << "\t";
+		}
+		return out;
+	}
+
+
+};
+
+int main()
+{
+	IntVector v;
+	v.push_back(10);
+	v.push_back(20);
+	v.push_back(30);
+	v.push_back(40);
+
+	int item = v[3];
+	cout << item << endl;
+
+	cout << v << endl;
+
+
+}
