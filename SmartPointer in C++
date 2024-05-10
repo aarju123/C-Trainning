@@ -1,0 +1,61 @@
+#include<iostream>
+#include<memory>
+using namespace std;
+
+class A
+{
+    
+    public:
+    
+    A(){
+        
+        cout<<"A instantiated"<<endl;
+    }
+    ~A(){
+        
+         cout<<"A Destructed"<<endl;
+    }
+    
+    void operation()
+    {
+        cout<<"A.Operation Called"<<endl;
+    }
+    
+};
+
+template<typename X>
+class SmartPointerofAnyType{
+    
+    X *ptr;
+    public:
+    
+    SmartPointerofAnyType(X* ptrRef):ptr(ptrRef){}
+    
+     ~SmartPointerofAnyType(){
+         delete ptr;
+     }
+
+//Power of operator overloading
+   X* operator->()
+    {
+        return ptr;
+    }
+    
+};
+void instantiate()
+{
+    SmartPointerofAnyType<A>smartPtr{new A()};
+    
+    smartPtr->operation();
+     
+     std::unique_ptr<A> newSmartptr = std::make_unique<A>();
+     
+     newSmartptr->operation();
+    
+    
+}
+
+int main()
+{
+    instantiate();
+}
