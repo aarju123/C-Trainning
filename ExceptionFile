@@ -1,0 +1,73 @@
+//Exception Handling : It is not runtime error, it information about runtime error, it describe thre //error
+
+//Automation checking 
+
+//Thread is the one who execute the code run time
+
+//Stack trace --> tracking the stack execution
+
+// Try : Accidental Zone
+//
+
+
+
+//Prevent the Exceptiom
+
+#include<iostream>
+
+using namespace std;
+class ErrorInfo{
+    public:
+             string methodName;
+             string lineNumber;
+             string message;
+};
+
+int divFun(int numerator, int divisor)
+{
+    int result;
+    
+    if(divisor<=0)
+    {
+        ErrorInfo errordetails;
+        errordetails.methodName = "divFun";
+        errordetails.lineNumber =13;
+        errordetails.message = "Divisor Value can not be zero or negative";
+          throw errordetails;
+         
+    }
+  
+    
+    return  numerator/divisor;
+  
+    
+}
+
+void init()
+{
+    cout<<"Init Begin"<<endl;
+    
+    try
+    {
+    divFun(10,0);
+    }
+    catch(ErrorInfo& exObj)
+    {
+        cout<<"Method name"<<exObj.methodName<<endl;
+    }
+
+    cout<<"Init End"<<endl;
+
+}
+
+int main()
+{
+    cout<<"Main Begin"<<endl;
+    init();
+     cout<<"Main End"<<endl;
+}
+
+
+
+
+
